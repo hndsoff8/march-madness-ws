@@ -2,3 +2,16 @@ logging:
   level: INFO
   loggers:
     com.lpratt: DEBUG
+
+database:
+  driverClass: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5433/march-madness
+  user: marchmadness
+  password: h3ll0h1
+  validationQuery: "SELECT 1"
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false

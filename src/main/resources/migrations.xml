@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-team" author="lpratt">
+        <createTable tableName="team">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seed" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-matchup" author="lpratt">
+        <createTable tableName="matchup">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="round" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teamOne" type="bigint">
+                <constraints foreignKeyName="FK_teamOne_team" references="team(id)"/>
+            </column>
+            <column name="teamTwo" type="bigint">
+                <constraints foreignKeyName="FK_teamTwo_team" references="team(id)"/>
+            </column>
+            <column name="winner" type="bigint">
+                <constraints foreignKeyName="FK_winner_teams" references="team(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="rename-matchup-columns" author="lpratt">
+        <renameColumn tableName="matchup" oldColumnName="teamOne" newColumnName="team_one"/>
+        <renameColumn tableName="matchup" oldColumnName="teamTwo" newColumnName="team_two"/>
+    </changeSet>
+
+</databaseChangeLog>
